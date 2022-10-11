@@ -9,13 +9,16 @@ finish-args:
   - --socket=x11
   - --socket=wayland
   - --share=network
+  - --filesystem=~/.steam:rw # Steam (Non-flatpak)
 modules:
   - python3-requirements.json
   - name: runner
     sources:
-      - type: dir
-        path: ./
+      - type: git
+        url: https://github.com/CapitaineJSparrow/steam-repo-manager
+        commit: 293cde71d68edaf2f5142204a16f707fee9656e7
     buildsystem: simple
     build-commands:
       - cp -r . /app
       - install -D ./tools/runner.sh /app/bin/runner.sh
+      - install -Dm644 $FLATPAK_ID.appdata.xml /app/share/metainfo/$FLATPAK_ID.appdata.xml

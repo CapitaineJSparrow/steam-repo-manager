@@ -21,9 +21,9 @@ py3 main.py
 # Create dependencies list for flatpak builder
 python3 ./tools/flatpak-pip-generator.py --requirements=requirements.txt 
 # Create a local repository
-sudo flatpak-builder --repo=repo --force-clean out org.captainjsparrow.steamdeckrepo.yml
+sudo flatpak-builder --repo=repo --force-clean out com.steamdeckrepo.manager.yml
 # Compile app into a single .flatpak
-flatpak build-bundle ./repo steamdeckrepo.flatpak org.captainjsparrow.steamdeckrepo
+flatpak build-bundle ./repo steamdeckrepo.flatpak com.steamdeckrepo.manager
 # Install
 sudo flatpak install steamdeckrepo.flatpak
 ```

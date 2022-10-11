@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-    <id>org.captainjsparrow.steamdeckrepo</id>
+    <id>com.steamdeckrepo.manager</id>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>MIT-0 OR Apache-2.0</project_license>
     <name>Steam Deck Repo Manager</name>
@@ -33,5 +33,5 @@
     <developer_name>Captain J. Sparrow</developer_name>
     <update_contact>6690149+CapitaineJSparrow@users.noreply.github.com</update_contact>
 
-    <launchable type="desktop-id">org.captainjsparrow.steamdeckrepo.desktop</launchable>
+    <launchable type="desktop-id">com.steamdeckrepo.manager.desktop</launchable>
 </component>

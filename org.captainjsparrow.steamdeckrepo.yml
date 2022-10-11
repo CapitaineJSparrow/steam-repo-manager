@@ -16,11 +16,11 @@ modules:
     sources:
       - type: git
         url: https://github.com/CapitaineJSparrow/steam-repo-manager
-        commit: 94afda0567be6bcec73d17a9666e3dfe0d5301a0
+        commit: 3547cae35f527c97c7e6c95cf4f28b892bdad185
     buildsystem: simple
     build-commands:
       - cp -r . /app
       - install -D ./tools/runner.sh /app/bin/runner.sh
-      - install -Dm644 $FLATPAK_ID.appdata.xml /app/share/metainfo/$FLATPAK_ID.appdata.xml
+      - install -Dm644 org.sparrowhawk.steamdeckrepo.appdata.xml /app/share/metainfo/org.captainjsparrow.steamdeckrepo.appdata.xml
       - install -Dm644 ./repomanager.svg -t /app/share/icons/hicolor/scalable/apps
       - install -Dm755 ./repomanager.desktop -t ${FLATPAK_DEST}/share/applications/

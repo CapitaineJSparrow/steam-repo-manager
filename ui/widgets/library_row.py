@@ -1,6 +1,6 @@
 from math import floor
 from gi.repository import GLib, Gtk, GdkPixbuf, Pango
-from ui.utils import download_video
+from ui.utils import download_video, open_external
 from ui.widgets.info_box import InfoBox
 
 GUTTER = 16
@@ -80,7 +80,8 @@ class LibraryRow(Gtk.Box):
 
             download_button = Gtk.Button(label="Download")
             download_button.connect('clicked', self.on_video_dl, boot_video["video"])
-            preview_button = Gtk.LinkButton(boot_video["video"], label="Preview")
+            preview_button = Gtk.Button(label="Preview")
+            preview_button.connect('clicked', open_external, boot_video["video"])
 
             actions.add(download_button)
             actions.add(preview_button)

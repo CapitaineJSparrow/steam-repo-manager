@@ -1,0 +1,21 @@
+id: org.catainjsparrow.steamdeckrepo
+sdk: org.gnome.Sdk
+runtime: org.gnome.Platform
+runtime-version: "43"
+command: runner.sh
+build-options:
+  share: network
+finish-args:
+  - --socket=x11
+  - --socket=wayland
+  - --share=network
+modules:
+  - python3-requirements.json
+  - name: runner
+    sources:
+      - type: dir
+        path: ./
+    buildsystem: simple
+    build-commands:
+      - cp -r . /app
+      - install -D ./tools/runner.sh /app/bin/runner.sh

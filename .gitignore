@@ -1,0 +1,6 @@
+venv
+.flatpak-builder
+out
+*.flatpak
+__pycache__/
+.idea/

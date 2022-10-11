@@ -39,6 +39,7 @@ class MainWindow(Gtk.Window):
 
         root_scroll = Gtk.ScrolledWindow()
         root_scroll.add(box)
+
         self.add(root_scroll)
         self.connect("destroy", Gtk.main_quit)
         self.show_all()
@@ -56,6 +57,10 @@ class MainWindow(Gtk.Window):
                 box.add(sep)
                 sep.show()
                 row.show_all()
+            footer = Gtk.Label(label="<span>Made with ♥ by Captain J. Sparrow using built on top of <a href='https://steamdeckrepo.com/'>Steam Deck Repo</a></span>")
+            footer.set_use_markup(True)
+            footer.show()
+            box.add(footer)
 
         def download_videos_async():
             loop = asyncio.new_event_loop()

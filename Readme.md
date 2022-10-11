@@ -8,7 +8,7 @@ A GUI interface to install boot videos on Steam Deck using [Steam Deck Repo](htt
 
 <a href='https://flathub.org/apps/details/com.steamdeckrepo.manager'><img width='200' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
-Steam Deck Repo Manager should be availablle in your distro Store, other wise run 
+Steam Deck Repo Manager should be available in your distro Store, other wise run 
 
 ```
 flatpak install --user flathub com.steamdeckrepo.manager
@@ -20,16 +20,4 @@ flatpak install --user flathub com.steamdeckrepo.manager
 python3 -m venv ./venv
 pip3 install -r requirements.txt
 py3 main.py
-```
-
-### Flatpak build
-```shell
-# Create dependencies list for flatpak builder
-python3 ./tools/flatpak-pip-generator.py --requirements=requirements.txt 
-# Create a local repository
-sudo flatpak-builder --repo=repo --force-clean out com.steamdeckrepo.manager.yml
-# Compile app into a single .flatpak
-flatpak build-bundle ./repo steamdeckrepo.flatpak com.steamdeckrepo.manager
-# Install
-sudo flatpak install steamdeckrepo.flatpak
 ```

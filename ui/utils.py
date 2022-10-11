@@ -4,6 +4,7 @@ import requests
 import glob
 import webbrowser
 
+
 def open_external(_, url: str = ''):
     webbrowser.open(url, new=0, autoraise=True)
 

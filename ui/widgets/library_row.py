@@ -88,7 +88,7 @@ class LibraryRow(Gtk.Box):
 
             container.add(label)
             container.add(img)
-            container.add(InfoBox(author=boot_video["author"], downloads=boot_video["downloads"]))
+            container.add(InfoBox(author=boot_video["author"], downloads=boot_video["downloads"], likes=boot_video["likes"]))
             container.add(actions)
 
             boot_video_container.add(container)

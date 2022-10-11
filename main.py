@@ -9,14 +9,15 @@ import time
 urllib3.disable_warnings()
 
 
-async def download_image(url, author, title, downloads, video):
+async def download_image(url, author, title, downloads, video, likes):
     response = requests.get(url, verify=False)
     return {
         "content": response.content,
         "author": author,
         "title": title,
         "downloads": downloads,
-        "video": video
+        "video": video,
+        "likes": likes
     }
 
 
@@ -29,7 +30,7 @@ async def get_videos():
 
     # Create an array of futures to gather them later
     images_list = list(map(
-        lambda x: download_image(x["thumbnail"], x["user"]["steam_name"], x["title"], x["downloads"], x["video"]),
+        lambda x: download_image(x["thumbnail"], x["user"]["steam_name"], x["title"], x["downloads"], x["video"], x["likes"]),
         response.json()["posts"]
     ))
 

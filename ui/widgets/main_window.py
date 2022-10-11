@@ -57,7 +57,7 @@ class MainWindow(Gtk.Window):
                 box.add(sep)
                 sep.show()
                 row.show_all()
-            footer = Gtk.Label(label="<span>Made with ♥ by Captain J. Sparrow using built on top of <a href='https://steamdeckrepo.com/'>Steam Deck Repo</a></span>")
+            footer = Gtk.Label(label="<span>Made with ♥ by Captain J. Sparrow built on top of <a href='https://steamdeckrepo.com/'>Steam Deck Repo</a></span>")
             footer.set_use_markup(True)
             footer.show()
             box.add(footer)

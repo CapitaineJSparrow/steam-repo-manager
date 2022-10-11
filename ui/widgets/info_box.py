@@ -1,8 +1,17 @@
-from gi.repository import Gtk
+import os
+
+from gi.repository import Gtk, GdkPixbuf
+
+
+def get_resource_path(rel_path):
+    dir_of_py_file = os.path.dirname(__file__)
+    rel_path_to_resource = os.path.join(dir_of_py_file, rel_path)
+    abs_path_to_resource = os.path.abspath(rel_path_to_resource)
+    return abs_path_to_resource
 
 
 class InfoBox(Gtk.Box):
-    def __init__(self, author: str = '', downloads: str = ''):
+    def __init__(self, author: str = '', downloads: str = '', likes: str = ''):
         super(InfoBox, self).__init__()
 
         self.set_orientation(Gtk.Orientation.HORIZONTAL)
@@ -12,10 +21,33 @@ class InfoBox(Gtk.Box):
         author = Gtk.Label(label=f"<b>{author}</b>")
         author.set_use_markup(True)
 
-        downloads = Gtk.Label(label=f"<span size='10000'>Downloads: {str(downloads)}</span>")
-        downloads.set_use_markup(True)
-        downloads.set_alignment(1, 0)
-        downloads.set_hexpand(True)
+        download_img = Gtk.Image()
+        download_img.set_from_file(get_resource_path("../icons/download.svg"))
+        pixbuf = download_img.get_pixbuf()
+        pixbuf = pixbuf.scale_simple(20, 20, GdkPixbuf.InterpType.BILINEAR)
+        download_img.set_from_pixbuf(pixbuf)
+        download_img.set_margin_left(6)
+
+        likes_img = Gtk.Image()
+        likes_img.set_from_file(get_resource_path("../icons/like.svg"))
+        pixbuf = likes_img.get_pixbuf()
+        pixbuf = pixbuf.scale_simple(20, 20, GdkPixbuf.InterpType.BILINEAR)
+        likes_img.set_from_pixbuf(pixbuf)
+        likes_img.set_margin_left(6)
+
+        actions_container = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        actions_container.set_hexpand(True)
+        actions_container.set_halign(Gtk.Align.END)
+
+        downloads = Gtk.Label(label=f"{str(downloads)}")
+        likes = Gtk.Label(label=f"{str(likes)}")
+        likes.set_margin_left(8)
 
         self.add(author)
-        self.add(downloads)
+        actions_container.add(downloads)
+        actions_container.add(download_img)
+        actions_container.add(likes)
+        actions_container.add(likes_img)
+        self.add(actions_container)
+        self.set_margin_bottom(10)
+        self.set_margin_top(10)

@@ -23,7 +23,7 @@ python3 ./tools/flatpak-pip-generator.py --requirements=requirements.txt
 # Create a local repository
 sudo flatpak-builder --repo=repo --force-clean out org.captainjsparrow.steamdeckrepo.yml
 # Compile app into a single .flatpak
-flatpak build-bundle ./repo steamdeckrepo.flatpak org.catainjsparrow.steamdeckrepo
+flatpak build-bundle ./repo steamdeckrepo.flatpak org.captainjsparrow.steamdeckrepo
 # Install
 sudo flatpak install steamdeckrepo.flatpak
 ```

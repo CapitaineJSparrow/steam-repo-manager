@@ -18,7 +18,6 @@ class MainWindow(Gtk.Window):
 
         self.set_position(Gtk.WindowPosition.CENTER)
         self.set_default_size(default_width, 680)
-        self.set_type_hint(Gdk.WindowTypeHint.MENU)
 
         # workaround for focus of first entry
         dummy_entry = Gtk.Entry()

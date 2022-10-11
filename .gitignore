@@ -4,3 +4,4 @@ out
 *.flatpak
 __pycache__/
 .idea/
+repo

@@ -1,10 +1,10 @@
-id: org.catainjsparrow.steamdeckrepo
+id: org.captainjsparrow.steamdeckrepo
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
 runtime-version: "43"
+rename-icon: repomanager
+rename-desktop-file: repomanager.desktop
 command: runner.sh
-build-options:
-  share: network
 finish-args:
   - --socket=x11
   - --socket=wayland
@@ -16,9 +16,11 @@ modules:
     sources:
       - type: git
         url: https://github.com/CapitaineJSparrow/steam-repo-manager
-        commit: 293cde71d68edaf2f5142204a16f707fee9656e7
+        commit: d79089d5630854e6f21111269732d03f4c5a0d15
     buildsystem: simple
     build-commands:
       - cp -r . /app
       - install -D ./tools/runner.sh /app/bin/runner.sh
       - install -Dm644 $FLATPAK_ID.appdata.xml /app/share/metainfo/$FLATPAK_ID.appdata.xml
+      - install -Dm644 ./repomanager.svg -t /app/share/icons/hicolor/scalable/apps
+      - install -Dm755 ./repomanager.desktop -t ${FLATPAK_DEST}/share/applications/

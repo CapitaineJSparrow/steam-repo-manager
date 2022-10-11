@@ -6,7 +6,13 @@ A GUI interface to install boot videos on Steam Deck using [Steam Deck Repo](htt
 
 ## Installation
 
-For now, there is no simple way to install Steam Deck Repo Manager. The plan is to publish the application on flathub.
+<a href='https://flathub.org/apps/details/com.steamdeckrepo.manager'><img width='200' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
+
+Steam Deck Repo Manager should be availablle in your distro Store, other wise run 
+
+```
+flatpak install --user flathub com.steamdeckrepo.manager
+```
 
 ### Contribute
 

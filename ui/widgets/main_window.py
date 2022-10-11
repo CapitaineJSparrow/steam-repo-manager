@@ -5,6 +5,7 @@ from gi.repository import Gtk, Gdk, GLib
 
 from main import get_videos
 from ui.widgets.library_row import LibraryRow
+from ui.widgets.header import Header
 
 GLOBAL_SPACING = 20
 added = False
@@ -34,7 +35,10 @@ class MainWindow(Gtk.Window):
         spinner = Gtk.Spinner()
         spinner.start()
 
+        head = Header()
+
         box.add(dummy_entry)
+        box.add(head)
         box.add(spinner)
 
         root_scroll = Gtk.ScrolledWindow()
@@ -43,12 +47,14 @@ class MainWindow(Gtk.Window):
         self.add(root_scroll)
         self.connect("destroy", Gtk.main_quit)
         self.show_all()
+        head.hide()
 
         # Dummy entry got focus, hide it now
         dummy_entry.destroy()
 
         def on_videos_downloaded(videos):
             spinner.stop()
+            head.show()
             for i in range(ceil(len(videos) / 3)):
                 row = LibraryRow(videos[i * ROW_COUNT:(i + 1) * ROW_COUNT], box.get_allocated_width(), ROW_COUNT)
                 sep = Gtk.Box()

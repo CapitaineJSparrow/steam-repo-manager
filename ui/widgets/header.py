@@ -1,0 +1,21 @@
+from gi.repository import Gtk
+from threading import Timer
+from ui.utils import clear_installed_videos
+
+
+class Header(Gtk.Box):
+    def reset_label(self, _, __):
+        self.clear_button.set_label(self.original_label)
+
+    def clear_videos(self, _=None):
+        clear_installed_videos()
+        self.clear_button.set_label("Done !")
+        Timer(3.0, self.reset_label, ("arg1", "arg2")).start()
+
+    def __init__(self):
+        super(Header, self).__init__()
+        self.original_label = "Clear installed videos"
+
+        self.clear_button = Gtk.Button(label=self.original_label)
+        self.clear_button.connect("clicked", self.clear_videos)
+        self.add(self.clear_button)

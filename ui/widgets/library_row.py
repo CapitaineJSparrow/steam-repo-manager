@@ -80,11 +80,12 @@ class LibraryRow(Gtk.Box):
 
             download_button = Gtk.Button(label="Download")
             download_button.connect('clicked', self.on_video_dl, boot_video["video"])
-            preview_button = Gtk.Button(label="Preview")
-            preview_button.connect('clicked', open_external, boot_video["video"])
+            # @TODO find a way to embed videos
+            # preview_button = Gtk.Button(label="Preview")
+            # preview_button.connect('clicked', open_external, boot_video["video"])
 
             actions.add(download_button)
-            actions.add(preview_button)
+            # actions.add(preview_button)
 
             container.add(label)
             container.add(img)

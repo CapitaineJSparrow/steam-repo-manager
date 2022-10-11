@@ -22,9 +22,9 @@
     -->
     <content_rating type="oars-1.1"/>
     <releases>
-        <release version="1.0.1" date="2022-10-11">
+        <release version="1.0.2" date="2022-10-11">
             <description>
-                <p>Update icon</p>
+                <p>Update icon, add footer with credits</p>
             </description>
         </release>
         <release version="1.0.1" date="2022-10-11">

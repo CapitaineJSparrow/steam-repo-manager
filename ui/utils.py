@@ -4,10 +4,6 @@ import requests
 import glob
 
 
-def open_external(_, url: str = ''):
-    os.system(f"xdg-open {url}")
-
-
 def download_video(_, url: str):
     dest_path = os.path.join(Path.home(), '.steam', 'root', 'config', 'uioverrides', 'movies')
 

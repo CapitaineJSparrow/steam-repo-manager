@@ -1,20 +1,14 @@
-import os
 from gi.repository import Gtk
 from gi.repository import Gst
-
-# https://cdn.steamdeckrepo.com/videos/0MB3YfS1Yx3s3Z6AwoSPBAFM9rEJfgOihseJr6bf.webm
 
 
 class PlaybackInterface:
     def __init__(self, url):
         self.url = url
-        window = Gtk.Window(Gtk.WindowType.TOPLEVEL)
+        window = Gtk.Window()
         window.set_title("Video-Player")
         window.set_default_size(300, 300)
         window.connect("destroy", Gtk.main_quit, "WM destroy")
-        hbox = Gtk.HBox()
-        self.entry = Gtk.Entry()
-        hbox.add(self.entry)
         self.movie_window = Gtk.DrawingArea()
         window.add(self.movie_window)
         window.show_all()

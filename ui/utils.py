@@ -22,6 +22,7 @@ def clear_installed_videos(_=None):
 
 
 def download_video(_, url: str):
+    print(f"Downloading {url}")
     clear_installed_videos()
     response = requests.get(url)
     open(os.path.join(Path(dest_path), "deck_startup.webm"), "wb").write(response.content)

@@ -12,7 +12,7 @@ class LibraryRow(Gtk.Box):
     def preview_video(self, _, url):
         PlaybackInterface(url)
 
-    def on_video_dl(_, url):
+    def on_video_dl(_, __, url):
         download_video(_, url)
         dialog = Gtk.MessageDialog(
             flags=0,

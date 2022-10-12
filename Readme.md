@@ -2,7 +2,7 @@
 
 A GUI interface to install boot videos on Steam Deck using [Steam Deck Repo](https://steamdeckrepo.com/) and GTK3. Thanks [Waylaidwanderer](https://www.reddit.com/user/waylaidwanderer) who created Steam Deck Repo !
 
-![](https://raw.githubusercontent.com/CapitaineJSparrow/steam-repo-manager/main/screenhot.png)
+![](https://raw.githubusercontent.com/CapitaineJSparrow/steam-repo-manager/main/screenshot.png)
 
 ## Installation
 

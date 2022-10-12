@@ -1,11 +1,12 @@
 import asyncio
 import threading
 from math import ceil
-from gi.repository import Gtk, Gdk, GLib
+from gi.repository import Gtk, GLib, Gst
 
 from main import get_videos
 from ui.widgets.library_row import LibraryRow
 from ui.widgets.header import Header
+from ui.widgets.playback_interface import PlaybackInterface
 
 GLOBAL_SPACING = 20
 added = False

@@ -1,14 +1,18 @@
 from math import floor
 from gi.repository import GLib, Gtk, GdkPixbuf, Pango
-from ui.utils import download_video, open_external
+from ui.utils import download_video
 from ui.widgets.info_box import InfoBox
+from ui.widgets.playback_interface import PlaybackInterface
 
 GUTTER = 16
 IMAGE_RATIO = 1.6
 
 
 class LibraryRow(Gtk.Box):
-    def on_video_dl(self, _, url):
+    def preview_video(self, _, url):
+        PlaybackInterface(url)
+
+    def on_video_dl(_, url):
         download_video(_, url)
         dialog = Gtk.MessageDialog(
             flags=0,
@@ -80,12 +84,11 @@ class LibraryRow(Gtk.Box):
 
             download_button = Gtk.Button(label="Download")
             download_button.connect('clicked', self.on_video_dl, boot_video["video"])
-            # @TODO find a way to embed videos
-            # preview_button = Gtk.Button(label="Preview")
-            # preview_button.connect('clicked', open_external, boot_video["video"])
+            preview_button = Gtk.Button(label="Preview")
+            preview_button.connect('clicked', self.preview_video, boot_video["video"])
 
             actions.add(download_button)
-            # actions.add(preview_button)
+            actions.add(preview_button)
 
             container.add(label)
             container.add(img)

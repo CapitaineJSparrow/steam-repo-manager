@@ -10,7 +10,7 @@
     </description>
     <screenshots>
         <screenshot type="default">
-            <image>https://raw.githubusercontent.com/CapitaineJSparrow/steam-repo-manager/main/screenhot.png</image>
+            <image>https://raw.githubusercontent.com/CapitaineJSparrow/steam-repo-manager/main/screenshot.png</image>
             <caption>Main Window</caption>
         </screenshot>
     </screenshots>
@@ -23,6 +23,11 @@
     -->
     <content_rating type="oars-1.1"/>
     <releases>
+        <release version="1.0.4" date="2022-10-12">
+            <description>
+                <p>Implemented a video streamer to preview boot videos</p>
+            </description>
+        </release>
         <release version="1.0.3" date="2022-10-12">
             <description>
                 <p>Add a button to clear installed videos</p>

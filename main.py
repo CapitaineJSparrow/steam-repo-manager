@@ -21,9 +21,9 @@ async def download_image(url, author, title, downloads, video, likes):
     }
 
 
-async def get_videos():
+async def get_videos(page: int):
     start_time = time.time()
-    url = "https://steamdeckrepo.com/api/posts"
+    url = f"https://steamdeckrepo.com/api/posts?page={page}"
     payload = {}
 
     response = requests.request("GET", url, data=payload)

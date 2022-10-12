@@ -4,7 +4,7 @@ from pathlib import Path
 import requests
 
 movies_path = os.path.join(Path.home(), '.steam', 'root', 'config', 'uioverrides', 'movies')
-library_path = "/home/sparrow/Desktop/library.js"
+library_path = os.path.join(Path.home(), '.local', 'share', 'Steam', 'steamui', 'library.js')
 
 
 def override_default_length_library():

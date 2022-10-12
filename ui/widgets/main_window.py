@@ -11,6 +11,19 @@ GLOBAL_SPACING = 20
 added = False
 ROW_COUNT = 3
 
+# Window
+# |
+# ScrolledWindow (root_scroll) -> requires to have exactly 1 children
+# |
+# Box (main_container)
+# |
+# Entry (dummy_entry)
+# Header (head)
+# LibraryRow duplicated n times
+# Spinner (spinner)
+# Button (more_button)
+# label (footer)
+
 
 class MainWindow(Gtk.Window):
     def __init__(self):
@@ -25,49 +38,45 @@ class MainWindow(Gtk.Window):
         dummy_entry = Gtk.Entry()
 
         # Global Layout
-        box = Gtk.Box()
-        box.set_margin_top(GLOBAL_SPACING)
-        box.set_margin_left(GLOBAL_SPACING)
-        box.set_margin_right(GLOBAL_SPACING)
-        box.set_margin_bottom(GLOBAL_SPACING)
-        box.set_valign(Gtk.Align.START)
-        box.set_orientation(Gtk.Orientation.VERTICAL)
+        main_container = Gtk.Box()
+        main_container.set_margin_top(GLOBAL_SPACING)
+        main_container.set_margin_bottom(GLOBAL_SPACING)
+        main_container.set_margin_left(GLOBAL_SPACING)
+        main_container.set_margin_right(GLOBAL_SPACING)
+        main_container.set_valign(Gtk.Align.START)
+        main_container.set_orientation(Gtk.Orientation.VERTICAL)
 
         self.head = Header()
-        box.add(dummy_entry)
-        box.add(self.head)
+        main_container.add(dummy_entry)
+        main_container.add(self.head)
 
         root_scroll = Gtk.ScrolledWindow()
-        root_scroll.add(box)
+        root_scroll.add(main_container)
 
         self.add(root_scroll)
         self.connect("destroy", Gtk.main_quit)
         self.show_all()
         self.head.hide()
 
-        self.item_container = Gtk.Box()
-        self.item_container.set_margin_top(GLOBAL_SPACING)
-        self.item_container.set_margin_left(GLOBAL_SPACING)
-        self.item_container.set_margin_right(GLOBAL_SPACING)
-        self.item_container.set_valign(Gtk.Align.START)
-        self.item_container.set_orientation(Gtk.Orientation.VERTICAL)
-        self.item_container.show()
-        box.add(self.item_container)
+        self.rows_container = Gtk.Box()
+        self.rows_container.set_margin_top(GLOBAL_SPACING)
+        self.rows_container.set_valign(Gtk.Align.START)
+        self.rows_container.set_orientation(Gtk.Orientation.VERTICAL)
+        self.rows_container.show()
+        main_container.add(self.rows_container)
 
         self.spinner = Gtk.Spinner()
-        box.add(self.spinner)
+        main_container.add(self.spinner)
 
         self.more_button = Gtk.Button(label="Load more")
         self.more_button.set_margin_bottom(GLOBAL_SPACING)
-        self.more_button.set_margin_left(GLOBAL_SPACING)
-        self.more_button.set_margin_right(GLOBAL_SPACING)
         self.more_button.connect('clicked', self.download_more)
-        box.add(self.more_button)
+        main_container.add(self.more_button)
 
         self.footer = Gtk.Label(
             label="<span>Made with ♥ by Captain J. Sparrow built on top of <a href='https://steamdeckrepo.com/'>Steam Deck Repo</a></span>")
         self.footer.set_use_markup(True)
-        box.add(self.footer)
+        main_container.add(self.footer)
 
         # Dummy entry got focus, hide it now
         dummy_entry.destroy()
@@ -82,12 +91,12 @@ class MainWindow(Gtk.Window):
         for i in range(ceil(len(videos) / ROW_COUNT)):
             row = LibraryRow(
                 videos[i * ROW_COUNT:(i + 1) * ROW_COUNT],
-                self.item_container.get_allocated_width(), ROW_COUNT
+                self.rows_container.get_allocated_width(), ROW_COUNT
             )
             sep = Gtk.Box()
             sep.set_margin_bottom(GLOBAL_SPACING)
-            self.item_container.add(row)
-            self.item_container.add(sep)
+            self.rows_container.add(row)
+            self.rows_container.add(sep)
             sep.show()
             row.show_all()
 

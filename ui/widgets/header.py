@@ -20,5 +20,4 @@ class Header(Gtk.Box):
 
         self.clear_button = Gtk.Button(label=self.original_label)
         self.clear_button.connect("clicked", self.clear_videos)
-        self.clear_button.set_margin_left(20)
         self.add(self.clear_button)

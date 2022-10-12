@@ -19,5 +19,5 @@ flatpak install --user flathub com.steamdeckrepo.manager
 ```shell
 python3 -m venv ./venv
 pip3 install -r requirements.txt
-py3 main.py
+python3 main.py
 ```

@@ -1,6 +1,6 @@
 from math import floor
 from gi.repository import GLib, Gtk, GdkPixbuf, Pango
-from ui.utils import download_video
+from utils import download_video
 from ui.widgets.info_box import InfoBox
 from ui.widgets.playback_interface import PlaybackInterface
 

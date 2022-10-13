@@ -8,15 +8,12 @@ library_path = os.path.join(Path.home(), '.local', 'share', 'Steam', 'steamui', 
 
 
 def override_default_length_library():
-    with open(library_path, 'r') as file:
-        file_data = file.read()
-
-    # Set 40 seconds, put a high limit does not cause any issue
-    file_data = file_data.replace('(s,1e4,[])', '(s,4e4,[])')
-
-    # Write the file out again
-    with open(library_path, 'w') as file:
-        file.write(file_data)
+    f = open(library_path, "rb+")
+    s = f.read()
+    f.seek(0)
+    s = s.replace(b'(s,1e4,[])', bytes(b"(s,4e4,[])"))
+    f.write(s)
+    f.close()
 
 
 def clear_installed_videos(_=None):

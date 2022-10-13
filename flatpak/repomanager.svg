@@ -1,7 +1,7 @@
 <svg class="img-fluid" id="outputsvg" xmlns="http://www.w3.org/2000/svg"
      style="transform: none; transform-origin: 50% 50%; cursor: move; max-height: none;" width="1024" height="1024"
      viewBox="0 0 10240 10240">
-    <g id="l5e1HHqgTmvAKCpoefE2zii" fill="rgb(0,0,0)" fill-opacity="0" style="transform: none;">
+    <g id="l5e1HHqgTmvAKCpoefE2zii" fill-opacity="0" style="transform: none;">
         <g>
             <path id="p1CED49WJB"
                   d="M0 5120 l0 -5120 5120 0 5120 0 0 5120 0 5120 -5120 0 -5120 0 0 -5120z m9759 2945 c24 -16 54 -48 65 -70 l21 -40 3 -2821 2 -2820 -27 -55 c-23 -45 -37 -59 -82 -82 l-55 -27 -4560 0 -4561 0 -51 24 c-53 25 -83 58 -102 115 -9 25 -12 747 -12 2840 l0 2806 24 51 c24 52 65 89 114 104 15 5 2086 8 4602 7 l4575 -2 44 -30z"></path>

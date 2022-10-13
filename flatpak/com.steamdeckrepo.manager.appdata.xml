@@ -23,6 +23,11 @@
     -->
     <content_rating type="oars-1.1"/>
     <releases>
+        <release version="1.0.7" date="2022-10-13">
+            <description>
+                <p>Add icon to show video duration, add a search filter and fix library.js not updated correctly.</p>
+            </description>
+        </release>
         <release version="1.0.6" date="2022-10-13">
             <description>
                 <p>Add icon to show video duration, add a search filter.</p>

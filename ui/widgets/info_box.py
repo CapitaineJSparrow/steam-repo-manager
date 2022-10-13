@@ -9,6 +9,16 @@ def get_resource_path(rel_path):
     return abs_path_to_resource
 
 
+class Icon(Gtk.Image):
+    def __init__(self, resource_path: str):
+        super(Icon, self).__init__()
+        self.set_from_file(get_resource_path(resource_path))
+        pixbuf = self.get_pixbuf()
+        pixbuf = pixbuf.scale_simple(18, 18, GdkPixbuf.InterpType.BILINEAR)
+        self.set_from_pixbuf(pixbuf)
+        self.set_margin_left(6)
+
+
 class InfoBox(Gtk.Box):
     def __init__(self, video):
         super(InfoBox, self).__init__()
@@ -26,26 +36,9 @@ class InfoBox(Gtk.Box):
         author.set_ellipsize(Pango.EllipsizeMode.END)
         author.set_use_markup(True)
 
-        download_img = Gtk.Image()
-        download_img.set_from_file(get_resource_path("../icons/download.svg"))
-        pixbuf = download_img.get_pixbuf()
-        pixbuf = pixbuf.scale_simple(20, 20, GdkPixbuf.InterpType.BILINEAR)
-        download_img.set_from_pixbuf(pixbuf)
-        download_img.set_margin_left(6)
-
-        likes_img = Gtk.Image()
-        likes_img.set_from_file(get_resource_path("../icons/like.svg"))
-        pixbuf = likes_img.get_pixbuf()
-        pixbuf = pixbuf.scale_simple(20, 20, GdkPixbuf.InterpType.BILINEAR)
-        likes_img.set_from_pixbuf(pixbuf)
-        likes_img.set_margin_left(6)
-
-        duration_img = Gtk.Image()
-        duration_img.set_from_file(get_resource_path("../icons/time.svg"))
-        pixbuf = duration_img.get_pixbuf()
-        pixbuf = pixbuf.scale_simple(20, 20, GdkPixbuf.InterpType.BILINEAR)
-        duration_img.set_from_pixbuf(pixbuf)
-        duration_img.set_margin_left(6)
+        download_img = Icon("../icons/download.svg")
+        likes_img = Icon("../icons/like.svg")
+        duration_img = Icon("../icons/time.svg")
 
         actions_container = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         actions_container.set_hexpand(True)
@@ -53,9 +46,9 @@ class InfoBox(Gtk.Box):
 
         downloads = Gtk.Label(label=f"{str(downloads)}")
         likes = Gtk.Label(label=f"{str(likes)}")
-        likes.set_margin_left(8)
+        likes.set_margin_left(6)
         duration = Gtk.Label(label=f"{str(duration)}s")
-        duration.set_margin_left(8)
+        duration.set_margin_left(6)
 
         self.add(author)
         actions_container.add(downloads)

@@ -5,6 +5,12 @@ import requests
 
 movies_path = os.path.join(Path.home(), '.steam', 'root', 'config', 'uioverrides', 'movies')
 library_path = os.path.join(Path.home(), '.local', 'share', 'Steam', 'steamui', 'library.js')
+CURRENT_VERSION = "1.0.7"
+
+
+def get_remote_version():
+    response = requests.get("https://raw.githubusercontent.com/CapitaineJSparrow/steam-repo-manager/main/flatpak/version.txt")
+    return response.text.rstrip()
 
 
 def override_default_length_library():

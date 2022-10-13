@@ -6,6 +6,7 @@ from gi.repository import Gtk, GLib, Gdk
 from main import get_videos
 from ui.widgets.library_row import LibraryRow
 from ui.widgets.header import Header
+from ui.widgets.update_frame import UpdateFrame
 from utils.debounce import debounce
 
 GLOBAL_SPACING = 20
@@ -51,6 +52,8 @@ class MainWindow(Gtk.Window):
         self.head = Header(on_search=self.on_search)
         main_container.add(dummy_entry)
         main_container.add(self.head)
+        update_frame = UpdateFrame()
+        main_container.add(update_frame)
 
         root_scroll = Gtk.ScrolledWindow()
         root_scroll.add(main_container)
@@ -59,6 +62,9 @@ class MainWindow(Gtk.Window):
         self.connect("destroy", Gtk.main_quit)
         self.show_all()
         self.head.hide()
+
+        if not update_frame.should_update:
+            update_frame.hide()
 
         self.rows_container = Gtk.Box()
         self.rows_container.set_margin_top(GLOBAL_SPACING)
@@ -127,6 +133,7 @@ class MainWindow(Gtk.Window):
 
     @debounce(1)
     def on_search(self, value):
+        # We need to put Gtk in right thread since debounce create a timer in a separate thread
         Gdk.threads_enter()
         self.more_button.hide()
 

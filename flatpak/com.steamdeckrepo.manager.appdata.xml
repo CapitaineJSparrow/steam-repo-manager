@@ -23,6 +23,11 @@
     -->
     <content_rating type="oars-1.1"/>
     <releases>
+        <release version="1.0.6" date="2022-10-13">
+            <description>
+                <p>Add icon to show video duration, add a search filter.</p>
+            </description>
+        </release>
         <release version="1.0.5" date="2022-10-12">
             <description>
                 <p>Updated icon, preview videos should now have sound, add a load more button, handle boot videos longer than 10 seconds.</p>

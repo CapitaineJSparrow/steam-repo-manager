@@ -9,7 +9,7 @@ import time
 urllib3.disable_warnings()
 
 
-async def download_image(url, author, title, downloads, video, likes):
+async def download_image(url, author, title, downloads, video, likes, duration):
     response = requests.get(url, verify=False)
     return {
         "content": response.content,
@@ -17,20 +17,23 @@ async def download_image(url, author, title, downloads, video, likes):
         "title": title,
         "downloads": downloads,
         "video": video,
-        "likes": likes
+        "likes": likes,
+        "duration": duration,
     }
 
 
-async def get_videos(page: int):
+async def get_videos(page: int, search: str = ''):
     start_time = time.time()
-    url = f"https://steamdeckrepo.com/api/posts?page={page}"
+    search_query = f"&search={search}" if len(search) > 0 else ""
+    url = f"https://steamdeckrepo.com/api/posts?page={page + 1}{search_query}"
+    print(url)
     payload = {}
 
     response = requests.request("GET", url, data=payload)
 
     # Create an array of futures to gather them later
     images_list = list(map(
-        lambda x: download_image(x["thumbnail"], x["user"]["steam_name"], x["title"], x["downloads"], x["video"], x["likes"]),
+        lambda x: download_image(x["thumbnail"], x["user"]["steam_name"], x["title"], x["downloads"], x["video"], x["likes"], x["video_duration"]),
         response.json()["posts"]
     ))
 

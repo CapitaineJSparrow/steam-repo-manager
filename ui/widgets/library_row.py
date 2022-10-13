@@ -38,8 +38,9 @@ class LibraryRow(Gtk.Box):
             pixbuf = buffer.scale_simple(size["width"], size["height"], GdkPixbuf.InterpType.BILINEAR)
             self.original_images[index].set_from_pixbuf(pixbuf)
 
-    def __init__(self, images, default_width, row_count):
+    def __init__(self, images, default_width, default_row_count):
         super(LibraryRow, self).__init__()
+        row_count = min(len(images), default_row_count)
 
         self.temp_height = 0
         self.event_count = 0
@@ -92,7 +93,7 @@ class LibraryRow(Gtk.Box):
 
             container.add(label)
             container.add(img)
-            container.add(InfoBox(author=boot_video["author"], downloads=boot_video["downloads"], likes=boot_video["likes"]))
+            container.add(InfoBox(video=boot_video))
             container.add(actions)
 
             boot_video_container.add(container)

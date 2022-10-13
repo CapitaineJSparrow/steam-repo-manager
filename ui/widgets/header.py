@@ -1,3 +1,4 @@
+from typing import Callable
 from gi.repository import Gtk
 from utils import clear_installed_videos
 
@@ -14,10 +15,23 @@ class Header(Gtk.Box):
         dialog.run()
         dialog.destroy()
 
-    def __init__(self):
+    def __init__(self, on_search: Callable):
         super(Header, self).__init__()
-        self.original_label = "Clear installed videos"
+        self.set_orientation(Gtk.Orientation.HORIZONTAL)
+        self.set_spacing(8)
 
-        self.clear_button = Gtk.Button(label=self.original_label)
-        self.clear_button.connect("clicked", self.clear_videos)
-        self.add(self.clear_button)
+        search_entry = Gtk.SearchEntry()
+        search_entry.set_hexpand(True)
+        search_entry.set_placeholder_text("Search for videos")
+
+        def on_search_changed(_):
+            on_search(search_entry.get_text())
+
+        search_entry.connect("search-changed", on_search_changed)
+
+        clear_button = Gtk.Button(label="Clear installed videos")
+        clear_button.connect("clicked", self.clear_videos)
+
+        self.add(search_entry)
+        self.add(clear_button)
+

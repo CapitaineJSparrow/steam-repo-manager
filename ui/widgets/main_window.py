@@ -1,15 +1,17 @@
 import asyncio
 import threading
 from math import ceil
-from gi.repository import Gtk, GLib
+from gi.repository import Gtk, GLib, Gdk
 
 from main import get_videos
 from ui.widgets.library_row import LibraryRow
 from ui.widgets.header import Header
+from utils.debounce import debounce
 
 GLOBAL_SPACING = 20
 added = False
 ROW_COUNT = 3
+
 
 # Window
 # |
@@ -46,7 +48,7 @@ class MainWindow(Gtk.Window):
         main_container.set_valign(Gtk.Align.START)
         main_container.set_orientation(Gtk.Orientation.VERTICAL)
 
-        self.head = Header()
+        self.head = Header(on_search=self.on_search)
         main_container.add(dummy_entry)
         main_container.add(self.head)
 
@@ -70,7 +72,7 @@ class MainWindow(Gtk.Window):
 
         self.more_button = Gtk.Button(label="Load more")
         self.more_button.set_margin_bottom(GLOBAL_SPACING)
-        self.more_button.connect('clicked', self.download_more)
+        self.more_button.connect('clicked', self.download_videos_and_apply_filters, {"paginate": True})
         main_container.add(self.more_button)
 
         self.footer = Gtk.Label(
@@ -80,11 +82,9 @@ class MainWindow(Gtk.Window):
 
         # Dummy entry got focus, hide it now
         dummy_entry.destroy()
+        self.download_videos_and_apply_filters()
 
-        # Get Videos in a new thread to prevent UI freeze
-        threading.Thread(target=self.download_videos_async, daemon=True, kwargs={'page': 0}).start()
-
-    def on_videos_downloaded(self, videos):
+    def on_videos_downloaded(self, videos, hide_pagination: bool = False):
         self.spinner.stop()
         self.head.show()  # Show clear video button
         self.footer.show()  # Show credits
@@ -104,20 +104,35 @@ class MainWindow(Gtk.Window):
                 self.more_button.set_label("Load more")
                 self.more_button.set_sensitive(True)
                 self.more_button.show()
-            else:
+            if hide_pagination:
                 self.more_button.hide()
 
-    def download_videos_async(self, page: int):
-        if page == 0:  # Do not show spinner when using pagination since it's not spinning due to threading issues
+    def download_videos_async(self, page: int, search: str = ''):
+        videos = asyncio.run(get_videos(page, search))
+        GLib.idle_add(self.on_videos_downloaded, videos, len(search) > 0)
+
+    def download_videos_and_apply_filters(self, _=None, paginate: bool = False, search: str = ''):
+        if paginate:
+            self.more_button.set_label("Loading ...")
+            self.more_button.set_sensitive(False)
+            self.current_page = self.current_page + 1
+        else:
             self.spinner.start()
             self.spinner.show()
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        videos = loop.run_until_complete(get_videos(page))
-        GLib.idle_add(self.on_videos_downloaded, videos)
+            self.footer.hide()
+            self.more_button.hide()
+            self.current_page = 0
 
-    def download_more(self, *args, **kwargs):
-        self.more_button.set_label("Loading ...")
-        self.more_button.set_sensitive(False)
-        self.current_page = self.current_page + 1
-        threading.Thread(target=self.download_videos_async, daemon=True, kwargs={'page': self.current_page}).start()
+        threading.Thread(target=self.download_videos_async, daemon=True, kwargs={'page': self.current_page, "search": search}).start()
+
+    @debounce(1)
+    def on_search(self, value):
+        Gdk.threads_enter()
+        self.more_button.hide()
+
+        # Empty library
+        for child in self.rows_container.get_children():
+            child.destroy()
+
+        self.download_videos_and_apply_filters(search=value)
+        Gdk.threads_leave()

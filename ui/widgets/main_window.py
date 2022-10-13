@@ -52,8 +52,8 @@ class MainWindow(Gtk.Window):
         self.head = Header(on_search=self.on_search)
         main_container.add(dummy_entry)
         main_container.add(self.head)
-        update_frame = UpdateFrame()
-        main_container.add(update_frame)
+        self.update_frame = UpdateFrame()
+        main_container.add(self.update_frame)
 
         root_scroll = Gtk.ScrolledWindow()
         root_scroll.add(main_container)
@@ -63,8 +63,8 @@ class MainWindow(Gtk.Window):
         self.show_all()
         self.head.hide()
 
-        if not update_frame.should_update:
-            update_frame.hide()
+        if not self.update_frame.should_update:
+            self.update_frame.hide()
 
         self.rows_container = Gtk.Box()
         self.rows_container.set_margin_top(GLOBAL_SPACING)

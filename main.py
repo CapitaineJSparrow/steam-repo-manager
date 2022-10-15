@@ -8,7 +8,7 @@ import time
 
 # Steam deck repo may have issue with SSL
 urllib3.disable_warnings()
-os.environ["GTK_THEME"] = "Arc-dark"
+os.environ["GTK_THEME"] = "Arc-Dark"
 
 async def download_image(url, author, title, downloads, video, likes, duration):
     response = requests.get(url, verify=False)

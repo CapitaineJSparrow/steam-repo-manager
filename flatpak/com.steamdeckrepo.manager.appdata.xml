@@ -23,6 +23,11 @@
     -->
     <content_rating type="oars-1.1"/>
     <releases>
+        <release version="1.0.8" date="2022-10-13">
+            <description>
+                <p>Add a dark theme (Arc-dark), add a frame when an update is available. Preliminary work for durations filters and randomize videos on boot but not ready yet !</p>
+            </description>
+        </release>
         <release version="1.0.7" date="2022-10-13">
             <description>
                 <p>Add icon to show video duration, add a search filter and fix library.js not updated correctly.</p>

@@ -8,7 +8,10 @@ import time
 
 # Steam deck repo may have issue with SSL
 urllib3.disable_warnings()
-os.environ["GTK_THEME"] = "Arc-Dark"
+
+# Nordic is the theme installed in Flatpak sandbox
+os.environ["GTK_THEME"] = "Yaru-dark"
+
 
 async def download_image(url, author, title, downloads, video, likes, duration):
     response = requests.get(url, verify=False)

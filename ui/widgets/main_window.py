@@ -2,11 +2,12 @@ import asyncio
 import threading
 from math import ceil
 from gi.repository import Gtk, GLib, Gdk
-
 from main import get_videos
+from ui.widgets.duration_filters import DurationFilters
 from ui.widgets.library_row import LibraryRow
 from ui.widgets.header import Header
 from ui.widgets.update_frame import UpdateFrame
+from utils import CURRENT_VERSION
 from utils.debounce import debounce
 
 GLOBAL_SPACING = 20
@@ -49,9 +50,13 @@ class MainWindow(Gtk.Window):
         main_container.set_valign(Gtk.Align.START)
         main_container.set_orientation(Gtk.Orientation.VERTICAL)
 
-        self.head = Header(on_search=self.on_search)
+        self.head = Header(on_search=self.on_search, on_duration_filter=self.on_duration_filter_click)
         main_container.add(dummy_entry)
+
         main_container.add(self.head)
+        self.duration_filters = DurationFilters()
+        main_container.add(self.duration_filters)
+
         self.update_frame = UpdateFrame()
         main_container.add(self.update_frame)
 
@@ -82,7 +87,7 @@ class MainWindow(Gtk.Window):
         main_container.add(self.more_button)
 
         self.footer = Gtk.Label(
-            label="<span>Made with ♥ by Captain J. Sparrow built on top of <a href='https://steamdeckrepo.com/'>Steam Deck Repo</a></span>")
+            label=f"<span>Made with ♥ by Captain J. Sparrow built on top of <a href='https://steamdeckrepo.com/'>Steam Deck Repo</a>. Version <b>{CURRENT_VERSION}</b></span>")
         self.footer.set_use_markup(True)
         main_container.add(self.footer)
 
@@ -143,3 +148,6 @@ class MainWindow(Gtk.Window):
 
         self.download_videos_and_apply_filters(search=value)
         Gdk.threads_leave()
+
+    def on_duration_filter_click(self, _):
+        self.duration_filters.set_expanded(not self.duration_filters.get_expanded())

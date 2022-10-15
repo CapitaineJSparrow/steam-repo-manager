@@ -15,7 +15,7 @@ class Header(Gtk.Box):
         dialog.run()
         dialog.destroy()
 
-    def __init__(self, on_search: Callable):
+    def __init__(self, on_search: Callable, on_duration_filter: Callable):
         super(Header, self).__init__()
         self.set_orientation(Gtk.Orientation.HORIZONTAL)
         self.set_spacing(8)
@@ -32,6 +32,10 @@ class Header(Gtk.Box):
         clear_button = Gtk.Button(label="Clear installed videos")
         clear_button.connect("clicked", self.clear_videos)
 
+        filter_duration_button = Gtk.Button(label="Filter by duration")
+        filter_duration_button.connect("clicked", on_duration_filter)
+
         self.add(search_entry)
         self.add(clear_button)
+        # self.add(filter_duration_button)
 

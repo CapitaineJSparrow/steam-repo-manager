@@ -1,4 +1,5 @@
 import asyncio
+import os
 
 from ui import ui
 import requests
@@ -7,7 +8,7 @@ import time
 
 # Steam deck repo may have issue with SSL
 urllib3.disable_warnings()
-
+os.environ["GTK_THEME"] = "Arc-dark"
 
 async def download_image(url, author, title, downloads, video, likes, duration):
     response = requests.get(url, verify=False)
@@ -26,7 +27,6 @@ async def get_videos(page: int, search: str = ''):
     start_time = time.time()
     search_query = f"&search={search}" if len(search) > 0 else ""
     url = f"https://steamdeckrepo.com/api/posts?page={page + 1}{search_query}"
-    print(url)
     payload = {}
 
     response = requests.request("GET", url, data=payload)

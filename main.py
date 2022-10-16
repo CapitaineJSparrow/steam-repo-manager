@@ -1,6 +1,11 @@
-import asyncio
-import os
+from random import randint
 
+import gi
+
+gi.require_version("Gtk", "3.0")
+gi.require_version('Gst', '1.0')
+
+import asyncio
 from ui import ui
 import requests
 import urllib3
@@ -8,7 +13,6 @@ import time
 
 # Steam deck repo may have issue with SSL
 urllib3.disable_warnings()
-os.environ["GTK_THEME"] = "Arc-Dark"
 
 
 async def download_image(url, author, title, downloads, video, likes, duration):
@@ -44,6 +48,9 @@ async def get_videos(page: int, search: str = ''):
     print(f"Downloaded in {duration} seconds")
     return videos
 
+PORTAL_BUS_NAME = "org.freedesktop.portal.Desktop"
+PORTAL_OBJECT_PATH = "/org/freedesktop/portal/desktop"
+PORTAL_SETTINGS_INTERFACE = "org.freedesktop.portal.Background"
 
 async def main():
     ui.build_ui()

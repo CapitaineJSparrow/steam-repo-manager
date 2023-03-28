@@ -9,7 +9,8 @@ CURRENT_VERSION = "1.0.8"
 
 
 def get_remote_version():
-    response = requests.get("https://raw.githubusercontent.com/CapitaineJSparrow/steam-repo-manager/main/flatpak/version.txt")
+    response = requests.get(
+        "https://raw.githubusercontent.com/CapitaineJSparrow/steam-repo-manager/main/flatpak/version.txt")
     return response.text.rstrip()
 
 
@@ -33,11 +34,11 @@ def clear_installed_videos(_=None):
         os.remove(f)
 
 
-def download_video(_, url: str):
+def download_video(_, url, title: str):
     print(f"Downloading {url}")
-    clear_installed_videos()
     response = requests.get(url)
-    open(os.path.join(Path(movies_path), "deck_startup.webm"), "wb").write(response.content)
+    # Replace "." symbol to avoid file format problem
+    open(os.path.join(Path(movies_path), title.replace(".", "") + ".webm"), "wb").write(response.content)
     override_default_length_library()
 
 

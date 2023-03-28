@@ -12,13 +12,13 @@ class LibraryRow(Gtk.Box):
     def preview_video(self, _, url):
         PlaybackInterface(url)
 
-    def on_video_dl(_, __, url):
-        download_video(_, url)
+    def on_video_dl(_, __, url, title):
+        download_video(_, url, title)
         dialog = Gtk.MessageDialog(
             flags=0,
             message_type=Gtk.MessageType.INFO,
             buttons=Gtk.ButtonsType.OK,
-            text="Success ! Video is installed on your Steam Deck, reboot your device.",
+            text="Success ! Video is installed on your Steam Deck.",
         )
         dialog.run()
         dialog.destroy()
@@ -84,7 +84,7 @@ class LibraryRow(Gtk.Box):
             actions.set_spacing(6)
 
             download_button = Gtk.Button(label="Download")
-            download_button.connect('clicked', self.on_video_dl, boot_video["video"])
+            download_button.connect('clicked', self.on_video_dl, boot_video["video"], boot_video["title"])
             preview_button = Gtk.Button(label="Preview")
             preview_button.connect('clicked', self.preview_video, boot_video["video"])
 

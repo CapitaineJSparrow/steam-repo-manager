@@ -73,7 +73,6 @@ class MainWindow(Gtk.Window):
         self.connect("destroy", Gtk.main_quit)
         self.show_all()
         self.head.hide()
-        self.connect_bus()
 
         if not self.update_frame.should_update:
             self.update_frame.hide()
@@ -158,49 +157,3 @@ class MainWindow(Gtk.Window):
 
     def on_duration_filter_click(self, _):
         self.duration_filters.set_expanded(not self.duration_filters.get_expanded())
-
-    def __receive_autostart(self, *args):
-        state = args[5][0]
-        autostart = args[5][1]['autostart']
-
-        if state != 0:
-            Gdk.threads_enter()
-            dialog = Gtk.MessageDialog(
-                flags=0,
-                message_type=Gtk.MessageType.INFO,
-                buttons=Gtk.ButtonsType.OK,
-                text="error requesting background",
-            )
-            dialog.run()
-            dialog.destroy()
-            Gdk.threads_leave()
-
-    def connect_bus(self):
-        bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
-        proxy = Gio.DBusProxy.new_sync(bus, Gio.DBusProxyFlags.NONE, None,
-                                       PORTAL_BUS_NAME,
-                                       PORTAL_OBJECT_PATH,
-                                       PORTAL_SETTINGS_INTERFACE,
-                                       None)
-        token = 0 + randint(10000000, 90000000)
-        options = {
-            'handle_token': GLib.Variant(
-                's', f'com/steamdeckrepo/manager/{token}'
-            ),
-            'reason': GLib.Variant('s', 'Steam deck repo abckground.'),
-            'autostart': GLib.Variant('b', True),
-            'commandline': GLib.Variant('as', ['python3', '/app/test.py']),
-            'dbus-activatable': GLib.Variant('b', False)
-        }
-        request = proxy.RequestBackground('(sa{sv})', '', options)
-        print(request)
-        bus.signal_subscribe(
-            'org.freedesktop.portal.Desktop',
-            'org.freedesktop.portal.Request',
-            'Response',
-            request,
-            None,
-            Gio.DBusSignalFlags.NO_MATCH_RULE,
-            self.__receive_autostart,
-            None
-        )

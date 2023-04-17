@@ -7,7 +7,7 @@ from utils.slugify import slugify
 
 movies_path = os.path.join(Path.home(), '.steam', 'root', 'config', 'uioverrides', 'movies')
 library_path = os.path.join(Path.home(), '.local', 'share', 'Steam', 'steamui', 'library.js')
-CURRENT_VERSION = "1.0.8"
+CURRENT_VERSION = "1.0.9"
 
 
 def get_remote_version():
@@ -40,6 +40,7 @@ def download_video(_, url, title: str):
     print(f"Downloading {url}")
     response = requests.get(url)
     trucatedTitle = (title[:75] + '..') if len(title) > 75 else title # Truncate title if > 75 chars
+    Path(movies_path).mkdir(parents=True, exist_ok=True)
     open(os.path.join(Path(movies_path), slugify(trucatedTitle) + ".webm"), "wb").write(response.content)
     override_default_length_library()
 

@@ -1,7 +1,9 @@
 import glob
 import os
-from pathlib import Path
 import requests
+
+from pathlib import Path
+from utils.slugify import slugify
 
 movies_path = os.path.join(Path.home(), '.steam', 'root', 'config', 'uioverrides', 'movies')
 library_path = os.path.join(Path.home(), '.local', 'share', 'Steam', 'steamui', 'library.js')
@@ -37,8 +39,8 @@ def clear_installed_videos(_=None):
 def download_video(_, url, title: str):
     print(f"Downloading {url}")
     response = requests.get(url)
-    # Replace "." symbol to avoid file format problem
-    open(os.path.join(Path(movies_path), title.replace(".", "") + ".webm"), "wb").write(response.content)
+    trucatedTitle = (title[:75] + '..') if len(title) > 75 else title # Truncate title if > 75 chars
+    open(os.path.join(Path(movies_path), slugify(trucatedTitle) + ".webm"), "wb").write(response.content)
     override_default_length_library()
 
 

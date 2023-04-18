@@ -1,3 +1,4 @@
+import platform
 import gi
 
 gi.require_version("Gtk", "3.0")
@@ -13,9 +14,10 @@ gtksettings.set_property(
 
 Gst.init(None)
 Gst.init_check(None)
-
+is_windows = platform.system() == "Windows"
 
 def build_ui():
-    Gdk.threads_init()
+    if not is_windows:
+        Gdk.threads_init()
     MainWindow()
     Gtk.main()

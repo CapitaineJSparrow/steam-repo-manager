@@ -18,7 +18,8 @@ flatpak install --user flathub com.steamdeckrepo.manager
 
 #### Requirements
 
-* `build-essentials gobject-introspection libcairo2-dev libjpeg-dev libgif-dev` 
+* A Linux OS
+* `build-essential gobject-introspection libcairo2-dev libjpeg-dev libgif-dev libgirepository1.0-dev` 
 * python3.10+
 
 ```shell
@@ -29,3 +30,5 @@ python3 main.py
 ```
 
 [Link to FlatHub repository](https://github.com/flathub/com.steamdeckrepo.manager)
+
+![](https://raw.githubusercontent.com/CapitaineJSparrow/steam-repo-manager/main/testing.jpg)

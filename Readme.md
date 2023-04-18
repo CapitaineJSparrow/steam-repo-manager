@@ -16,8 +16,16 @@ flatpak install --user flathub com.steamdeckrepo.manager
 
 ### Contribute
 
+#### Requirements
+
+* `build-essentials gobject-introspection libcairo2-dev libjpeg-dev libgif-dev` 
+* python3.10+
+
 ```shell
 python3 -m venv ./venv
+source ./venv/bin/activate
 pip3 install -r requirements.txt
 python3 main.py
 ```
+
+[Link to FlatHub repository](https://github.com/flathub/com.steamdeckrepo.manager)

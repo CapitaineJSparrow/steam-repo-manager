@@ -7,6 +7,7 @@ class UpdateFrame(Gtk.Frame):
     def __init__(self):
         super(UpdateFrame, self).__init__()
         remote_version = get_remote_version()
+        print(remote_version)
         self.should_update = version.parse(CURRENT_VERSION) < version.parse(remote_version)
         self.set_label("Update available")
         self.set_margin_top(20)

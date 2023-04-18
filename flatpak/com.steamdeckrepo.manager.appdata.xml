@@ -27,7 +27,7 @@
             <description>
                 <p>Improvements for version 1.0.9 deployed yesterday:</p>
                 <ul>
-                    <li>Users can now install multiple videos at once.</li>
+                    <li>Users can now install multiple videos at once, Steam OS will pick one randomly at boot.</li>
                     <li>When a video is installed, the "Download" button is disabled.</li>
                     <li>The "Download" button is enabled again if the file has been removed manually from filesystem or using the "Clear installed videos" button.</li>
                 </ul>

@@ -28,7 +28,7 @@ pip3 install -r requirements.txt
 python3 main.py
 ```
 
-### Installation on Windows
+#### Contributing on Windows
 
 Download [MSYS2](https://www.msys2.org/), then open mingw64
 

@@ -8,7 +8,7 @@ from ui.widgets.duration_filters import DurationFilters
 from ui.widgets.library_row import LibraryRow
 from ui.widgets.header import Header
 from ui.widgets.update_frame import UpdateFrame
-from utils import CURRENT_VERSION
+from utils import CURRENT_VERSION, list_installed_videos
 from utils.debounce import debounce
 
 GLOBAL_SPACING = 20
@@ -102,13 +102,15 @@ class MainWindow(Gtk.Window):
         self.download_videos_and_apply_filters()
 
     def on_videos_downloaded(self, videos, hide_pagination: bool = False):
+        installed_videos = list_installed_videos()
         self.spinner.stop()
         self.head.show()  # Show clear video button
         self.footer.show()  # Show credits
         for i in range(ceil(len(videos) / ROW_COUNT)):
             row = LibraryRow(
                 videos[i * ROW_COUNT:(i + 1) * ROW_COUNT],
-                self.rows_container.get_allocated_width(), ROW_COUNT
+                self.rows_container.get_allocated_width(), ROW_COUNT,
+                installed_videos
             )
             sep = Gtk.Box()
             sep.set_margin_bottom(GLOBAL_SPACING)

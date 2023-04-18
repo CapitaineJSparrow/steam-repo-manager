@@ -10,7 +10,7 @@ class Header(Gtk.Box):
             flags=0,
             message_type=Gtk.MessageType.INFO,
             buttons=Gtk.ButtonsType.OK,
-            text="Success ! Reboot your device, default boot video should be back.",
+            text="Success ! All videos have been removed.",
         )
         dialog.run()
         dialog.destroy()

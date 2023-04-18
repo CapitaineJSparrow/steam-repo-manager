@@ -1,5 +1,4 @@
 from random import randint
-
 import gi
 
 gi.require_version("Gtk", "3.0")
@@ -48,12 +47,10 @@ async def get_videos(page: int, search: str = ''):
     print(f"Downloaded in {duration} seconds")
     return videos
 
-PORTAL_BUS_NAME = "org.freedesktop.portal.Desktop"
-PORTAL_OBJECT_PATH = "/org/freedesktop/portal/desktop"
-PORTAL_SETTINGS_INTERFACE = "org.freedesktop.portal.Background"
 
 async def main():
     ui.build_ui()
+
 
 if __name__ == "__main__":
     asyncio.run(main())

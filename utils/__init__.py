@@ -16,6 +16,11 @@ def get_remote_version():
     return response.text.rstrip()
 
 
+def list_installed_videos():
+    files = [slugify(f.name) for f in Path(movies_path).iterdir() if f.is_file()]
+    return files
+
+
 def clear_installed_videos(_=None):
     # Ensure directory exists
     Path(movies_path).mkdir(parents=True, exist_ok=True)

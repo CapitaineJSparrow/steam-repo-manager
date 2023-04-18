@@ -30,7 +30,7 @@ python3 main.py
 
 ### Installation on Windows
 
-Download MsyS2, then open mingw64
+Download [MSYS2](https://www.msys2.org/), then open mingw64
 
 ```bash
 pacman -Suy

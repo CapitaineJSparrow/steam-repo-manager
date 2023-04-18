@@ -17,6 +17,9 @@ def get_remote_version():
 
 
 def list_installed_videos():
+    if not os.path.exists(movies_path):
+        return []
+
     files = [slugify(f.name) for f in Path(movies_path).iterdir() if f.is_file()]
     return files
 

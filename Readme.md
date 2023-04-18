@@ -18,7 +18,6 @@ flatpak install --user flathub com.steamdeckrepo.manager
 
 #### Requirements
 
-* A Linux OS
 * `build-essential gobject-introspection libcairo2-dev libjpeg-dev libgif-dev libgirepository1.0-dev` 
 * python3.10+
 
@@ -27,6 +26,21 @@ python3 -m venv ./venv
 source ./venv/bin/activate
 pip3 install -r requirements.txt
 python3 main.py
+```
+
+### Installation on Windows
+
+Download MsyS2, then open mingw64
+
+```bash
+pacman -Suy
+pacman -S mingw-w64-x86_64-gtk3 mingw-w64-x86_64-python3 mingw-w64-x86_64-python3-gobject git
+gtk3-demo #to check GTK is working
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py # Install pip manually since mingw packages are causing issues
+python get-pip.py
+python -m pip install -U --force-reinstall pip
+rm get-pip.py
+pip install -r requirements_windows.txt # Do not use a venv it's also causing issues ..
 ```
 
 [Link to FlatHub repository](https://github.com/flathub/com.steamdeckrepo.manager)

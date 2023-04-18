@@ -7,7 +7,7 @@ from utils.slugify import slugify
 
 movies_path = os.path.join(Path.home(), '.steam', 'root', 'config', 'uioverrides', 'movies')
 library_path = os.path.join(Path.home(), '.local', 'share', 'Steam', 'steamui', 'library.js')
-CURRENT_VERSION = "1.0.9"
+CURRENT_VERSION = "1.0.10"
 
 
 def get_remote_version():

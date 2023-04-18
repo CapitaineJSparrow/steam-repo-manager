@@ -160,7 +160,7 @@ class MainWindow(Gtk.Window):
     def on_duration_filter_click(self, _):
         self.duration_filters.set_expanded(not self.duration_filters.get_expanded())
 
-    def on_clear_videos(self):
+    def on_clear_videos(self) -> None:
         for child in self.rows_container.get_children():
             if isinstance(child, LibraryRow):
                 for button in child.buttons:

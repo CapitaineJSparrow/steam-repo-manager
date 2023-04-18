@@ -50,6 +50,7 @@ class LibraryRow(Gtk.Box):
         self.original_buffers = []
         self.original_images = []
         self.row_count = row_count
+        self.buttons = []
 
         scroll = Gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.NEVER)
@@ -90,6 +91,7 @@ class LibraryRow(Gtk.Box):
             download_button.connect('clicked', self.on_video_dl, boot_video["video"], boot_video["title"])
             preview_button = Gtk.Button(label="Preview")
             preview_button.connect('clicked', self.preview_video, boot_video["video"])
+            self.buttons.append(download_button)
 
             actions.add(download_button)
             actions.add(preview_button)

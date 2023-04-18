@@ -16,15 +16,6 @@ def get_remote_version():
     return response.text.rstrip()
 
 
-def override_default_length_library():
-    f = open(library_path, "rb+")
-    s = f.read()
-    f.seek(0)
-    s = s.replace(b'(s,1e4,[])', bytes(b"(s,4e4,[])"))
-    f.write(s)
-    f.close()
-
-
 def clear_installed_videos(_=None):
     # Ensure directory exists
     Path(movies_path).mkdir(parents=True, exist_ok=True)
@@ -42,7 +33,6 @@ def download_video(_, url, title: str):
     trucatedTitle = (title[:75] + '..') if len(title) > 75 else title # Truncate title if > 75 chars
     Path(movies_path).mkdir(parents=True, exist_ok=True)
     open(os.path.join(Path(movies_path), slugify(trucatedTitle) + ".webm"), "wb").write(response.content)
-    override_default_length_library()
 
 
 def open_external(_, url: str = ''):

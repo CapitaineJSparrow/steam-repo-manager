@@ -14,11 +14,13 @@ class Header(Gtk.Box):
         )
         dialog.run()
         dialog.destroy()
+        self.on_clear()
 
-    def __init__(self, on_search: Callable, on_duration_filter: Callable):
+    def __init__(self, on_search: Callable, on_duration_filter: Callable, on_clear: Callable):
         super(Header, self).__init__()
         self.set_orientation(Gtk.Orientation.HORIZONTAL)
         self.set_spacing(8)
+        self.on_clear = on_clear
 
         search_entry = Gtk.SearchEntry()
         search_entry.set_hexpand(True)

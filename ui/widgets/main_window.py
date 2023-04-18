@@ -56,7 +56,7 @@ class MainWindow(Gtk.Window):
         main_container.set_valign(Gtk.Align.START)
         main_container.set_orientation(Gtk.Orientation.VERTICAL)
 
-        self.head = Header(on_search=self.on_search, on_duration_filter=self.on_duration_filter_click)
+        self.head = Header(on_search=self.on_search, on_duration_filter=self.on_duration_filter_click, on_clear=self.on_clear_videos)
         main_container.add(dummy_entry)
 
         main_container.add(self.head)
@@ -159,3 +159,9 @@ class MainWindow(Gtk.Window):
 
     def on_duration_filter_click(self, _):
         self.duration_filters.set_expanded(not self.duration_filters.get_expanded())
+
+    def on_clear_videos(self):
+        for child in self.rows_container.get_children():
+            if isinstance(child, LibraryRow):
+                for button in child.buttons:
+                    button.set_sensitive(True)

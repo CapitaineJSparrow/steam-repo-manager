@@ -1,5 +1,6 @@
 import glob
 import os
+import platform
 import requests
 
 from pathlib import Path
@@ -9,6 +10,7 @@ movies_path = os.path.join(Path.home(), '.steam', 'root', 'config', 'uioverrides
 library_path = os.path.join(Path.home(), '.local', 'share', 'Steam', 'steamui', 'library.js')
 CURRENT_VERSION = "1.0.10"
 
+is_windows = platform.system() == "Windows"
 
 def get_remote_version():
     response = requests.get(

@@ -6,6 +6,12 @@ def get_resource_path(rel_path):
     dir_of_py_file = os.path.dirname(__file__)
     rel_path_to_resource = os.path.join(dir_of_py_file, rel_path)
     abs_path_to_resource = os.path.abspath(rel_path_to_resource)
+
+    if "_MEI" in dir_of_py_file:
+        parent_folder = os.path.abspath(os.path.join(abs_path_to_resource, "..\\..\\.."))
+        nom_fichier = os.path.basename(abs_path_to_resource)
+        return os.path.join(parent_folder, nom_fichier)
+
     return abs_path_to_resource
 
 

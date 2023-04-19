@@ -4,4 +4,8 @@ out
 *.flatpak
 __pycache__/
 .idea/
-repo
+dist
+dist
+deckrepo.spec
+main.spec
+build

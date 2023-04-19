@@ -42,6 +42,10 @@ python -m pip install -U --force-reinstall pip
 rm get-pip.py
 pip install -r requirements_windows.txt # Do not use a venv it's also causing issues ..
 python main.py
+
+# Optional, if you want to build the app on windows as a .exe
+pip install pyinstaller
+pyinstaller -F --clean --add-data "./ui/icons/*;ui/icons" main.py
 ```
 
 [Link to FlatHub repository](https://github.com/flathub/com.steamdeckrepo.manager)

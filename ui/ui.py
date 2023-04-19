@@ -6,6 +6,7 @@ gi.require_version('Gst', '1.0')
 
 from ui.widgets.main_window import MainWindow
 from gi.repository import Gtk, Gdk, Gst
+from utils import is_windows
 
 gtksettings = Gtk.Settings.get_default()
 gtksettings.set_property(
@@ -14,7 +15,6 @@ gtksettings.set_property(
 
 Gst.init(None)
 Gst.init_check(None)
-is_windows = platform.system() == "Windows"
 
 def build_ui():
     if not is_windows:

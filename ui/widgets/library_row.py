@@ -1,9 +1,11 @@
 from math import floor
+import os
 from gi.repository import GLib, Gtk, GdkPixbuf, Pango
 from utils import download_video, list_installed_videos, slugify
 from ui.widgets.info_box import InfoBox
 from ui.widgets.playback_interface import PlaybackInterface
 from typing import List
+from utils import is_windows
 
 GUTTER = 16
 IMAGE_RATIO = 1.6
@@ -11,7 +13,10 @@ IMAGE_RATIO = 1.6
 
 class LibraryRow(Gtk.Box):
     def preview_video(self, _, url):
-        PlaybackInterface(url)
+        if is_windows:
+            os.startfile(url)
+        else:
+            PlaybackInterface(url)
 
     def on_video_dl(self, widget, url, title):
         widget.set_sensitive(False)

@@ -30,11 +30,11 @@ python3 main.py
 
 #### Contributing on Windows
 
-Download [MSYS2](https://www.msys2.org/), then open mingw64
+Download [MSYS2](https://www.msys2.org/), then open **mingw64** (not msys2)
 
 ```bash
 pacman -Suy
-pacman -S mingw-w64-x86_64-gtk3 mingw-w64-x86_64-python3 mingw-w64-x86_64-python3-gobject git
+pacman -S mingw-w64-x86_64-gtk3 mingw-w64-x86_64-python3 mingw-w64-x86_64-python3-gobject mingw-w64-x86_64-gst-python git
 gtk3-demo #to check GTK is working
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py # Install pip manually since mingw packages are causing issues
 python get-pip.py

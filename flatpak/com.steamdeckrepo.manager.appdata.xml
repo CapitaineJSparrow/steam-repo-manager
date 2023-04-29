@@ -23,6 +23,16 @@
     -->
     <content_rating type="oars-1.1"/>
     <releases>
+        <release version="1.0.11" date="2023-04-29">
+            <description>
+                <ul>
+                    <li><strong>Fix a crash preventing to open the app in specific situations</strong></li>
+                    <li>Users can now install multiple videos at once, Steam OS will pick one randomly at boot.</li>
+                    <li>When a video is installed, the "Download" button is disabled.</li>
+                    <li>The "Download" button is enabled again if the file has been removed manually from filesystem or using the "Clear installed videos" button.</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.0.10" date="2023-04-18">
             <description>
                 <p>Improvements for version 1.0.9 deployed yesterday:</p>

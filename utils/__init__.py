@@ -8,7 +8,7 @@ from utils.slugify import slugify
 
 movies_path = os.path.join(Path.home(), '.steam', 'root', 'config', 'uioverrides', 'movies')
 library_path = os.path.join(Path.home(), '.local', 'share', 'Steam', 'steamui', 'library.js')
-CURRENT_VERSION = "1.0.10"
+CURRENT_VERSION = "1.0.11"
 
 is_windows = platform.system() == "Windows"
 

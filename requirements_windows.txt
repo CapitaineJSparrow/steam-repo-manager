@@ -5,4 +5,4 @@ packaging==23.1
 pycairo==1.23.0
 PyGObject==3.44.1
 requests==2.31.0
-urllib3==1.26.15
+urllib3==1.26.17
